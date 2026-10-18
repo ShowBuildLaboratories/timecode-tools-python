@@ -1,0 +1,9 @@
+/target
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+.venv/
+dist/
+.pytest_cache/
+.DS_Store

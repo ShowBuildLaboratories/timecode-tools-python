@@ -1,0 +1,52 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "timecode-tools"
+version = "0.1.0"
+description = "SMPTE LTC and MIDI Time Code (MTC) readers for Python: stream in PCM or MIDI bytes, get timecode, lock, loss and jump events. Rust core, prebuilt wheels."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Takashi Funama", email = "support@showbuildlabs.com" }]
+requires-python = ">=3.10"
+keywords = ["timecode", "smpte", "ltc", "linear-timecode", "mtc", "midi", "midi-timecode", "audio", "decoder", "show-control"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Rust",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Topic :: Multimedia :: Video",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/ShowBuildLaboratories/timecode-tools-python"
+Repository = "https://github.com/ShowBuildLaboratories/timecode-tools-python"
+Issues = "https://github.com/ShowBuildLaboratories/timecode-tools-python/issues"
+Changelog = "https://github.com/ShowBuildLaboratories/timecode-tools-python/blob/main/CHANGELOG.md"
+
+[tool.maturin]
+python-source = "python"
+module-name = "timecode_tools._native"
+features = ["pyo3/extension-module"]
+include = [{ path = "LICENSE", format = "sdist" }, { path = "CHANGELOG.md", format = "sdist" }]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true

@@ -1,0 +1,34 @@
+[package]
+name = "timecode-tools-python"
+description = "Python bindings for timecode-tools (published to PyPI as `timecode-tools`)"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+license = "MIT"
+authors = ["Takashi Funama <support@showbuildlabs.com>"]
+repository = "https://github.com/ShowBuildLaboratories/timecode-tools-python"
+# Distributed through PyPI only.
+publish = false
+
+# Standalone: not part of any parent workspace.
+[workspace]
+
+[lib]
+name = "_native"
+crate-type = ["cdylib"]
+# Tested from Python (tests/); a Rust test binary cannot link libpython.
+test = false
+doctest = false
+
+[dependencies]
+# The Rust core (https://github.com/ShowBuildLaboratories/timecode-tools-rs),
+# pinned to the exact release. See CONTRIBUTING.md for trying unreleased
+# core changes.
+timecode-tools = "=0.1.0"
+# abi3: one wheel per platform covers every Python from 3.10 on.
+pyo3 = { version = "=0.30.1", features = ["extension-module", "abi3-py310"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = "symbols"

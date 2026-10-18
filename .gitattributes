@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Compared byte for byte with the core repository.
+goldens/** -text
