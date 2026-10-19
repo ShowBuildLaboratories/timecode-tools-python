@@ -90,8 +90,10 @@ impl Pcm {
                 return Err(invalid("float32 data must be a multiple of 4 bytes"));
             }
             Ok(Pcm::F32(
-                data.chunks_exact(4)
-                    .map(|b| f32::from_ne_bytes([b[0], b[1], b[2], b[3]]))
+                data.as_chunks::<4>()
+                    .0
+                    .iter()
+                    .map(|b| f32::from_ne_bytes(*b))
                     .collect(),
             ))
         } else {
@@ -99,8 +101,10 @@ impl Pcm {
                 return Err(invalid("int16 data must be a multiple of 2 bytes"));
             }
             Ok(Pcm::I16(
-                data.chunks_exact(2)
-                    .map(|b| i16::from_ne_bytes([b[0], b[1]]))
+                data.as_chunks::<2>()
+                    .0
+                    .iter()
+                    .map(|b| i16::from_ne_bytes(*b))
                     .collect(),
             ))
         }
